@@ -5,6 +5,9 @@
 #include "input.h"
 #include <ctime>
 #include <random>
+#include <vector>
+#include <stack>
+#include "TowerOfHanoi.h"
 
 using namespace std;
 void option1();
@@ -21,7 +24,7 @@ int main()
 		system("cls");
 		cout << "\n\t\t CMPR131 Chapter 9: Recursive Applications";
 		cout << "\n\t\t" << string(70, char(205));
-		cout << "\n\t\t1> Pattern of astricks and blanks";
+		cout << "\n\t\t1> Pattern of asterisks and blanks";
 		cout << "\n\t\t2> Guess a number";
 		cout << "\n\t\t3> Solve Tower of Hanoi";		
 		cout << "\n\t\t4> Solve n-Queens";
@@ -45,7 +48,7 @@ int main()
 void option1()
 {
 	system("cls");
-	cout << "\n\n\t1> Pattern of astricks and blanks";
+	cout << "\n\n\t1> Pattern of asterisks and blanks";
 
 
 
@@ -91,18 +94,32 @@ void guessNumber(int low, int high, int count)
 
 	guessNumber(low, high, count);
 }
+
+// Tower of Hanoi (recursive)
+// Precondition: Utilizes the TowerOfHanoi class to play the game.
+// Postcondition: Manages user input for the amount of rings to be used in order to play the Tower of Hanoi game. Plays until the user decides to stop (N).
 void option3()
 {
-	system("cls");
-	short numberOfRings = inputInteger("\n\tEnter the number of rings (1..64): ", 1, 64);
+	do
+	{
+		system("cls");
+		cout << "Tower of Hanoi (Recursive)";
+		cout << "\n" << string(70, char(196));
+		short rings = inputInteger("\n\n\tEnter the number of rings (1..64): ", 1, 64);
 
+		TowerOfHanoi tower(rings);
 
+		tower.start();
+
+	} while (toupper(inputChar("\n\tPlay again? (Y-yes or N-no): ", "YN")));
 }
+
+
 void option4()
 {
 	system("cls");
 	short boardDimension = inputInteger("\n\tEnter the board dimension dxd: ", true);
 
-	short firstColumnPosition = inputInteger("\n\tEnter the colume position(1.." + to_string(boardDimension) + ") of the first Queen on row 1:", 1, boardDimension);
+	short firstColumnPosition = inputInteger("\n\tEnter the column position(1.." + to_string(boardDimension) + ") of the first Queen on row 1:", 1, boardDimension);
 
 }
