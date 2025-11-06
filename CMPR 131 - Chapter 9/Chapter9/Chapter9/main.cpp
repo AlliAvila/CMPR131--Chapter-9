@@ -1,15 +1,17 @@
 // Names: Allison Avila, Hayden Martinez, David Derramadero
 // Date : Started 11/5/2025
 // Chapter 9 - Assignments 
+
 #include <iostream>
-#include "input.h"
 #include <ctime>
 #include <random>
-
+#include "input.h"
+#include "nQueens.h"
 using namespace std;
+
 void option1();
 void option2();
-void guessNumber(int low,int high,int count);
+void guessNumber(int low, int high, int count);
 void option3();
 void option4();
 
@@ -23,7 +25,7 @@ int main()
 		cout << "\n\t\t" << string(70, char(205));
 		cout << "\n\t\t1> Pattern of astricks and blanks";
 		cout << "\n\t\t2> Guess a number";
-		cout << "\n\t\t3> Solve Tower of Hanoi";		
+		cout << "\n\t\t3> Solve Tower of Hanoi";
 		cout << "\n\t\t4> Solve n-Queens";
 		cout << "\n\t\t" << string(70, char(196));
 		cout << "\n\t\t0> Exit";
@@ -42,6 +44,7 @@ int main()
 	} while (true);
 	return 0;
 }
+
 void option1()
 {
 	system("cls");
@@ -50,6 +53,7 @@ void option1()
 
 
 }
+
 void option2()
 {
 	system("cls");
@@ -59,10 +63,11 @@ void option2()
 	int guessCounter = 1;
 	int min = 1;
 	int max = ogMaxNumber;
-	
+
 	guessNumber(min, max, guessCounter);
 
 }
+
 void guessNumber(int low, int high, int count)
 {
 	if (low == high)
@@ -91,6 +96,7 @@ void guessNumber(int low, int high, int count)
 
 	guessNumber(low, high, count);
 }
+
 void option3()
 {
 	system("cls");
@@ -98,11 +104,24 @@ void option3()
 
 
 }
+
+/// Pre-Condition: 
+/// Called from main if the user chose option 4
+/// Post-Condition:
+/// Displays a solution to the n-Queens game if possible based on the user's input
 void option4()
 {
 	system("cls");
+	cout << "\n\t3> n-Queens Problem ";
+	cout << "\n\t" << string(65, char(196));
+
 	short boardDimension = inputInteger("\n\tEnter the board dimension dxd: ", true);
+
+	nQueens game(boardDimension);
 
 	short firstColumnPosition = inputInteger("\n\tEnter the colume position(1.." + to_string(boardDimension) + ") of the first Queen on row 1:", 1, boardDimension);
 
+	bool solved = game.solveNQueens(firstColumnPosition);
+
+	system("pause");
 }
