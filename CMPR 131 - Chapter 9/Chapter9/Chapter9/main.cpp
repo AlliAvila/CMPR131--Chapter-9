@@ -111,7 +111,7 @@ void option3()
 
 		tower.start();
 
-	} while (toupper(inputChar("\n\tPlay again? (Y-yes or N-no): ", "YN")));
+	} while (toupper(inputChar("\n\tPlay again? (Y-yes or N-no): ", "YN")) != 'N');
 }
 
 
@@ -123,3 +123,4 @@ void option4()
 	short firstColumnPosition = inputInteger("\n\tEnter the column position(1.." + to_string(boardDimension) + ") of the first Queen on row 1:", 1, boardDimension);
 
 }
+
