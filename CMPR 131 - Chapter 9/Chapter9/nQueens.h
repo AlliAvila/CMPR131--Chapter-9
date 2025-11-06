@@ -22,7 +22,9 @@ private:
     {
         // Base case: all queens have been placed
         if (row == dimension)
+        {
             return true;
+        }
 
         // Try to place a queen in each column of the current row
         for (int col = 0; col < dimension; col++)
