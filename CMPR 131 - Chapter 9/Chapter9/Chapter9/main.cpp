@@ -122,6 +122,5 @@ void option4()
 	short firstColumnPosition = inputInteger("\n\tEnter the colume position(1.." + to_string(boardDimension) + ") of the first Queen on row 1:", 1, boardDimension);
 
 	bool solved = game.solveNQueens(firstColumnPosition);
-
-	system("pause");
 }
+
