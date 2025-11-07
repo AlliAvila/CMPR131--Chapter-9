@@ -78,9 +78,9 @@ void printStars(int n)
 // Post-Condtion: Prints a pattern of * recursively separated by spaces
 void pattern(int level, int spaces)
 {
-	if (level > 1) return; // Base case: stop after level 3
+	if (level > 1) return; // Base case: stop after printing the bottom side
 
-	// Line 1: 1 star
+	// Line 1: 1 star *
 	printSpaces(spaces);
 	printStars(1);
 	cout << "\n";
@@ -197,3 +197,4 @@ void option4()
 
 	bool solved = game.solveNQueens(firstColumnPosition);
 }
+
