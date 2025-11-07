@@ -2,12 +2,16 @@
 // Date : Started 11/5/2025
 // Chapter 9 - Assignments 
 #include <iostream>
-#include "input.h"
 #include <ctime>
 #include <random>
+#include "input.h"
+#include "nQueens.h"
 
 using namespace std;
 void option1();
+void pattern(int level, int spaces);
+void printSpaces(int n);
+void printStars(int n);
 void option2();
 void guessNumber(int low,int high,int count);
 void option3();
@@ -45,11 +49,84 @@ int main()
 void option1()
 {
 	system("cls");
-	cout << "\n\n\t1> Pattern of astricks and blanks";
+	cout << "\n\n\t1> Pattern of astricks and blanks\n";
 
-
-
+	pattern(0, 0);
+	
+	cout << "\n";
 }
+
+
+// Pre-Condition: Gets called from pattern and n is the number of spaces
+// Post-Condtion: prints the number of spaces
+void printSpaces(int n)
+{
+	if (n == 0) return;
+	cout << " ";
+	printSpaces(n - 1);
+}
+// Pre-Condition: Gets called from pattern and n is the number of starts
+// Post-Condtion: prints the number of stars
+void printStars(int n)
+{
+	if (n == 0) return;
+	cout << "*";
+	if (n > 1) cout << " ";
+	printStars(n - 1);
+}
+// Pre-Condition: Gets called from main
+// Post-Condtion: Prints a pattern of * recursively separated by spaces
+void pattern(int level, int spaces)
+{
+	if (level > 1) return; // Base case: stop after level 3
+
+	// Line 1: 1 star
+	printSpaces(spaces);
+	printStars(1);
+	cout << "\n";
+
+	// Line 2: 2 stars
+	printSpaces(spaces);
+	printStars(2);
+	cout << "\n";
+
+	// Line 3: 1 star, spacesed more
+	printSpaces(spaces + 2);
+	printStars(1);
+	cout << "\n";
+
+	// Line 4: 4 stars
+	printSpaces(spaces);
+	printStars(4);
+	cout << "\n";
+
+	// Line 5: 1 star, spacesed more
+	printSpaces(spaces + 4);
+	printStars(1);
+	cout << "\n";
+
+	// Line 6: 2 stars
+	printSpaces(spaces + 4);
+	printStars(2);
+	cout << "\n";
+
+	// Line 7: 1 star, spacesed more
+	printSpaces(spaces + 6);
+	printStars(1);
+	cout << "\n";
+
+	// Line 8: 8 stars
+	if (level == 1)
+		return;
+
+	printSpaces(spaces);
+	printStars(8);
+	cout << "\n";
+	pattern(level + 1, spaces + 8);
+}
+
+// Pre-Condition: Gets called from main
+// Post-Condtion: calls guessNumber function and displays the number the user was guessing of
 void option2()
 {
 	system("cls");
@@ -63,6 +140,8 @@ void option2()
 	guessNumber(min, max, guessCounter);
 
 }
+// Pre-Condition: Gets called from option two with high being the first max number to guess from
+// Post-Condtion: calls recursivly until the number is found
 void guessNumber(int low, int high, int count)
 {
 	if (low == high)
@@ -75,7 +154,7 @@ void guessNumber(int low, int high, int count)
 	int guess = (low + high) / 2;
 	if (toupper(inputChar("\n\tIs your number " + to_string(guess) + "? (Y-yes or N-no): ", static_cast<string>("yn"))) == 'Y')
 	{
-		cout << "\n\tNumber of guesses: " << count;
+		cout << "\n\tNumber of guesses: " << count << " Yay!";
 		return;
 	}
 	if (toupper(inputChar("\tIs your number larger than " + to_string(guess) + "? (Y-yes or N-no): ", static_cast<string>("yn"))) == 'Y')
@@ -91,6 +170,8 @@ void guessNumber(int low, int high, int count)
 
 	guessNumber(low, high, count);
 }
+
+
 void option3()
 {
 	system("cls");
@@ -98,11 +179,21 @@ void option3()
 
 
 }
+/// Pre-Condition: 
+/// Called from main if the user chose option 4
+/// Post-Condition:
+/// Displays a solution to the n-Queens game if possible based on the user's input
 void option4()
 {
 	system("cls");
+	cout << "\n\t3> n-Queens Problem ";
+	cout << "\n\t" << string(65, char(196));
+
 	short boardDimension = inputInteger("\n\tEnter the board dimension dxd: ", true);
+
+	nQueens game(boardDimension);
 
 	short firstColumnPosition = inputInteger("\n\tEnter the colume position(1.." + to_string(boardDimension) + ") of the first Queen on row 1:", 1, boardDimension);
 
+	bool solved = game.solveNQueens(firstColumnPosition);
 }
