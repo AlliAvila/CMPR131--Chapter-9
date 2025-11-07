@@ -5,6 +5,7 @@
 #include <ctime>
 #include <random>
 #include "input.h"
+#include "TowerOfHanoi.h"
 #include "nQueens.h"
 
 using namespace std;
@@ -153,7 +154,7 @@ void guessNumber(int low, int high, int count)
 	
 	int guess = (low + high) / 2;
 
-	if (guess == 0)
+	if (guess <= 1)
 	{
 		cout << "\n\tYour number must be " << low << "!";
 		cout << "\n\tNumber of guesses: " << count;
@@ -178,12 +179,23 @@ void guessNumber(int low, int high, int count)
 }
 
 
+// Tower of Hanoi (recursive)
+// Precondition: Utilizes the TowerOfHanoi class to play the game.
+// Postcondition: Manages user input for the amount of rings to be used in order to play the Tower of Hanoi game. Plays until the user decides to stop (N).
 void option3()
 {
-	system("cls");
-	short numberOfRings = inputInteger("\n\tEnter the number of rings (1..64): ", 1, 64);
+	do
+	{
+		system("cls");
+		cout << "Tower of Hanoi (Recursive)";
+		cout << "\n" << string(70, char(196));
+		short rings = inputInteger("\n\n\tEnter the number of rings (1..64): ", 1, 64);
 
+		TowerOfHanoi tower(rings);
 
+		tower.start();
+
+	} while (toupper(inputChar("\n\tPlay again? (Y-yes or N-no): ", static_cast<string>("yn"))) != 'N');
 }
 /// Pre-Condition: 
 /// Called from main if the user chose option 4
@@ -195,11 +207,11 @@ void option4()
 	cout << "\n\t3> n-Queens Problem ";
 	cout << "\n\t" << string(65, char(196));
 
-	short boardDimension = inputInteger("\n\tEnter the board dimension dxd: ", true);
+	int boardDimension = inputInteger("\n\tEnter the board dimension dxd: ",true);
 
 	nQueens game(boardDimension);
 
-	short firstColumnPosition = inputInteger("\n\tEnter the colume position(1.." + to_string(boardDimension) + ") of the first Queen on row 1:", 1, boardDimension);
+	int firstColumnPosition = inputInteger("\n\tEnter the colume position(1.." + to_string(boardDimension) + ") of the first Queen on row 1:", 1, boardDimension);
 
 	bool solved = game.solveNQueens(firstColumnPosition);
 }
