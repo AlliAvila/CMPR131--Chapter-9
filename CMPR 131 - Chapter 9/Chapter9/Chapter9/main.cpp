@@ -150,18 +150,18 @@ void guessNumber(int low, int high, int count)
 		cout << "\n\tNumber of guesses: " << count;
 		return;
 	}
+	
 	int guess = (low + high) / 2;
 
-	
-	if (toupper(inputChar("\n\tIs your number " + to_string(guess) + "? (Y-yes or N-no): ", static_cast<string>("yn"))) == 'Y')
-	{
-		cout << "\n\tNumber of guesses: " << count << " Yay!";
-		return;
-	}
-	else if (guess == 1)
+	if (guess == 0)
 	{
 		cout << "\n\tYour number must be " << low << "!";
 		cout << "\n\tNumber of guesses: " << count;
+		return;
+	}
+	if (toupper(inputChar("\n\tIs your number " + to_string(guess) + "? (Y-yes or N-no): ", static_cast<string>("yn"))) == 'Y')
+	{
+		cout << "\n\tNumber of guesses: " << count << " Yay!";
 		return;
 	}
 	if (toupper(inputChar("\tIs your number larger than " + to_string(guess) + "? (Y-yes or N-no): ", static_cast<string>("yn"))) == 'Y')
