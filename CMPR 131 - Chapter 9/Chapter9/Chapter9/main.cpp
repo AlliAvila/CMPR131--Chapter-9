@@ -116,7 +116,7 @@ void pattern(int level, int spaces)
 	cout << "\n";
 
 	// Line 8: 8 stars
-	if (level == 1)
+	if (level == 1) // Other base case to not print the 8 * stars
 		return;
 
 	printSpaces(spaces);
@@ -197,4 +197,5 @@ void option4()
 
 	bool solved = game.solveNQueens(firstColumnPosition);
 }
+
 
